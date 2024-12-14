@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Plotter Box</title>
+    <link rel="shortcut icon" href="./assets/lock.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,1 00..800;1,100..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: "JetBrains Mono", monospace;
+        }
+        form {
+            background-color: #fff;
+            width: 400px;
+            justify-content: center;
+            margin: auto;
+            margin-top: 15%;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid rgb(205, 205, 205);
+            text-align: center;
+            box-shadow: 0 0 10px rgb(187, 187, 187);
+        }
+
+        button
+        {
+            background-color: #fff;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+        button:active
+        {
+            background-color: #f4f4f4f4;
+        }
+
+        input
+        {
+            border-radius:5px ;
+            border: 1px solid gray;
+            padding-left: 10px;
+        }
+
+        img
+        {
+            width: 50px;
+            margin-bottom: -25px;
+        }
+    </style>
+  </head>
+  <body>
+    <form>
+        <!-- <img src="./assets/lock.png"> -->
+        <h1 style="color: gray;">Plotter Box</h1>
+        <input type="text" id="input" style="font-size:1rem;"> 
+        <button id="save" type="button">Decode</button>
+        <div id="result" style="margin-top: 10px; min-height: 25px; border:1px solid gray; border-radius:5px; font-size:1rem;"></div>
+    </form>
+
+    
+
+    <!-- Tambahkan pustaka CryptoJS dari CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    
+    <script>
+        const encryptedData = "U2FsdGVkX1/QAqmH1npmm11rgPa1NAbInWPbQmRzqOdeBKJVNfJQSzvbznOkIxGBgju1BZPjg9kgdiB37PLZlyJ6SViJm9l8r/CGZq9OgHS2XOpdbWxh55U13AQeAju40Jy9+1zAiKDVfpIoItbcpyu37K/HYia0Tc1g+vYeWWodva4z8lNozh9dO5V2eoDLJj6NRuevygDLQi6b6Dm7NTS+UZjt/XRmCI1+uWJrN8OvU79vF4vGBVnUBRAORdktQtXxklykc/bbg68wVVaoFgVkmSW3Zkq/H6p74Qm4hj++Om81Fqn1P+8+udwvh3RDcFnjB8oPHp4TFnHBsZOMAUMz8sEf7cMNjpgvITurBVKI2b1HnUgTla9WpZHToK/4F0aXtHFEFojUeoDDIXHF/An+glthRiC3xwnhO9hPR6MMd047udOCHn9moSvBQ+APl6Vfgd9AAw9YgKvkAR8oItRnPmoiaqaJivdva/SHtXwqPEK5mWJd4X304MXfzR1R8IBrdWTwoseH8NziYYG8WqhQMr7n3WQodMtIPz48xpmcirM8OuAOVHcaGrxaxGrf4yIugeIYM1waNnqStdcyW8FHBM+CCghr0CdGyLQtNhR5mtFIDpR9fS7ZMMeFU3eqa4qI68kyUjfceQ7AedkTAazvOCQJicualUTKiOaBHzAStghNU7yD8fT8Z3zpuMQjH6bjl0NkFN9a7xhZ8vfDd00trjh3vNpLQuKfuSSDcQtVhbljuOveCHQFP4c6vwshD9Tg8Na8hBJrTJeIk8jV3sxegYbG5cJVdzpzCbf/l1+UHXD03HeIcl6POtjHvqjsHRvXZmhM3nEuoP1oa27BoB34mTnswi+DfpDjHV2DmEnnHPkkE04//O+NZlFVp3qXU7Da0O3en8CO3ouPIya6s0ZMjPv6T/ekTaY76WzVdYpV7nG1YsjcCIXzkwLwrZDjDisp1N0aFARfTvvGmZIphQ==";
+        const secretKey = "3301_102";
+
+        // Fungsi untuk mendekripsi data
+        function decryptData(encrypted, key) {
+            const bytes = CryptoJS.AES.decrypt(encrypted, key);
+            return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        }
+
+        // Dekripsi data terenkripsi
+        const data = decryptData(encryptedData, secretKey);
+
+        // Tangkap elemen dari HTML
+        const process = document.getElementById('save');
+        const result = document.getElementById('result');
+
+        // Tambahkan event listener untuk tombol
+        process.addEventListener('click', () => {
+            const inputValue = document.getElementById('input').value;
+            if (data[inputValue]) {
+                result.textContent = data[inputValue];
+            } else {
+                result.textContent = "Kode tidak ditemukan.";
+            }
+        });
+
+        process.addEventListener('click', () => {
+            input = document.getElementById('input').value;
+            if(input === "book"){
+                location.href = 'table.html';
+            }
+            else if(input === "who_anonym?")
+            {
+                alert("Are You Want Know About We? enough for you to ask! Or something will happen(-:")
+            }
+        })
+    </script>
+  </body>
+</html>
